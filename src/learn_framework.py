@@ -11,6 +11,7 @@ import os
 import random
 import shutil
 from tqdm import tqdm
+import time
 
 import numpy as np
 
@@ -65,6 +66,7 @@ class LFramework(nn.Module):
 
     def run_train(self, train_data, dev_data):
         self.print_all_model_parameters()
+        start = time.time()
 
         if self.optim is None:
             self.optim = optim.Adam(
@@ -111,6 +113,9 @@ class LFramework(nn.Module):
                     clip_grad_norm_(self.parameters(), self.grad_norm)
 
                 self.optim.step()
+                torch.cuda.synchronize()
+                end = time.time()
+                print("Epoch time = ", end-start)
 
                 batch_losses.append(loss['print_loss'])
                 if 'entropy' in loss:
