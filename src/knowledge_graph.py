@@ -29,6 +29,8 @@ class KnowledgeGraph(nn.Module):
     """
     def __init__(self, args):
         super(KnowledgeGraph, self).__init__()
+        #Here we have the vocabs files to use to map the embeddings created by
+        #LM with the corresponding ID. ID here correspond to ID in textual dataset
         self.entity2id, self.id2entity = {}, {}
         self.relation2id, self.id2relation = {}, {}
         self.type2id, self.id2type = {}, {}
