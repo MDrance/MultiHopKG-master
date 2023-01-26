@@ -26,7 +26,7 @@ def transformer_embeddings(data_path: str, entity2id: dict) -> tuple[Tensor]:
     print("def_vocab for KEY : {0}".format(def_vocab[entity2id["14854262"]]))
     
     corpus = list(id_to_def.values())
-    print("Procuding embeddings with")
+    print("Constructing BERT embeddings")
     corpus_embeddings = transformer.encode(corpus, convert_to_tensor=True, show_progress_bar=True)
 
     return corpus_embeddings

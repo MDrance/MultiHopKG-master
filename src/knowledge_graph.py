@@ -370,9 +370,9 @@ class KnowledgeGraph(nn.Module):
         corpus_embeddings = transformer_embeddings(self.args.data_dir, self.entity2id)
         self.entity_embeddings = nn.Embedding.from_pretrained(corpus_embeddings, freeze=True)
         self.relation_embeddings = nn.Embedding(self.num_relations, self.relation_dim)
-        nn.init.xavier_normal(self.relation_embeddings.weight)
+        nn.init.xavier_normal_(self.relation_embeddings.weight)
         self.EDropout = nn.Dropout(self.emb_dropout_rate)
-        self.RDropout = nn.Dropout(self.RDropout)
+        self.RDropout = nn.Dropout(self.emb_dropout_rate)
 
     def define_modules(self):
         if not self.args.relation_only:
