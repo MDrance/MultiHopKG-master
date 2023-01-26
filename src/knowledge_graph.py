@@ -73,9 +73,12 @@ class KnowledgeGraph(nn.Module):
         self.EDropout = None
         self.RDropout = None
 
-        self.define_modules_transfo()        
-        # self.define_modules()
-        # self.initialize_modules()
+
+        if args.process_data:       
+            self.define_modules()
+            self.initialize_modules()
+        else:
+            self.define_modules_transfo() 
 
     def load_graph_data(self, data_dir):
         # Load indices
