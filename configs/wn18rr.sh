@@ -6,8 +6,8 @@ group_examples_by_query="False"
 use_action_space_bucketing="True"
 
 bandwidth=500
-entity_dim=200
-relation_dim=200
+entity_dim=384
+relation_dim=384
 history_dim=200
 history_num_layers=3
 num_rollouts=20

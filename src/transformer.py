@@ -9,6 +9,7 @@ def transformer_embeddings(data_path: str, entity2id: dict) -> tuple[Tensor]:
     Using this mapping, create embeddings given the DEFINITION using Transformer
     Embeddings will be ordered matching the entity2id and relation2id
     """
+    #Look how to add special token for dummy and no op https://www.sbert.net/docs/training/overview.html
     id_to_def_path = data_path + "/id_to_def.json"
     with open(id_to_def_path, "r") as id_to_def_json:
         id_to_def = json.load(id_to_def_json)
@@ -16,7 +17,7 @@ def transformer_embeddings(data_path: str, entity2id: dict) -> tuple[Tensor]:
     id_to_def["NO_OP_ENTITY"] = ""
 
     def_vocab = {}
-    transformer = SentenceTransformer("all-MiniLM-L6-v2")
+    transformer = SentenceTransformer("all-MiniLM-L12-v2")
 
     for key, value in entity2id.items():
         def_vocab[value] = id_to_def[key]
@@ -27,6 +28,6 @@ def transformer_embeddings(data_path: str, entity2id: dict) -> tuple[Tensor]:
     
     corpus = list(id_to_def.values())
     print("Constructing BERT embeddings")
-    corpus_embeddings = transformer.encode(corpus, convert_to_tensor=True, show_progress_bar=True)
+    corpus_embeddings = transformer.encode(corpus, convert_to_tensor=True, show_progress_bar=True, batch_size=512)
 
     return corpus_embeddings
