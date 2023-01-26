@@ -43,6 +43,10 @@ parser.add_argument('--gpu', type=int, default=0,
                     help='gpu device (default: 0)')
 parser.add_argument('--checkpoint_path', type=str, default=None,
                     help='path to a pretrained checkpoint')
+parser.add_argument("--eemb_freeze", type=int, default=0,
+                    help="0 to train entity embedding, 1 to freeze entity embedding")
+parser.add_argument("--remb_freeze", type=int, default=0,
+                    help="0 to train relation embedding, 1 to freeze relation embedding")
 
 # Data
 parser.add_argument('--test', action='store_true',

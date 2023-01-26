@@ -58,6 +58,8 @@ cmd="python3 -m src.experiments \
     --complex_state_dict_path $complex_state_dict_path \
     --conve_state_dict_path $conve_state_dict_path \
     --gpu $gpu \
+    --eemb_freeze $eemb_freeze \
+    --remb_freeze $remb_freeze \ 
     $ARGS"
 
 echo "Executing $cmd"

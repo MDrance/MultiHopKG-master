@@ -29,6 +29,8 @@ action_dropout_anneal_interval=1000
 beta=0
 relation_only="False"
 beam_size=128
+eemb_freeze=0
+remb_freeze=0
 
 num_paths_per_entity=-1
 margin=-1

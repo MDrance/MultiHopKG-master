@@ -72,6 +72,9 @@ class KnowledgeGraph(nn.Module):
         self.relation_img_embeddings = None
         self.EDropout = None
         self.RDropout = None
+        self.eemb_freeze = True if args.eemb_freeze else False
+        self.remb_freeze = True if args.remb_freeze else False
+        
 
 
         if args.process_data:       
@@ -368,7 +371,7 @@ class KnowledgeGraph(nn.Module):
 
     def define_modules_transfo(self):
         corpus_embeddings = transformer_embeddings(self.args.data_dir, self.entity2id)
-        self.entity_embeddings = nn.Embedding.from_pretrained(corpus_embeddings, freeze=True)
+        self.entity_embeddings = nn.Embedding.from_pretrained(corpus_embeddings, freeze=self.eemb_freeze)
         self.relation_embeddings = nn.Embedding(self.num_relations, self.relation_dim)
         nn.init.xavier_normal_(self.relation_embeddings.weight)
         self.EDropout = nn.Dropout(self.emb_dropout_rate)

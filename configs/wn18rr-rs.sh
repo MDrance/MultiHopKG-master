@@ -37,3 +37,6 @@ conve_state_dict_path="model/WN18RR-conve-RV-xavier-200-200-0.003-32-3-0.3-0.3-0
 
 num_paths_per_entity=-1
 margin=-1
+
+eemb_freeze=0
+remb_freeze=0
