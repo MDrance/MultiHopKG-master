@@ -21,7 +21,7 @@ from src.data_utils import START_RELATION_ID
 import src.utils.ops as ops
 from src.utils.ops import int_var_cuda, var_cuda
 from numpy import unique
-from transformer import transformer_embeddings
+from src.transformer import transformer_embeddings
 
 
 class KnowledgeGraph(nn.Module):
