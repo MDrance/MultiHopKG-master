@@ -12,6 +12,8 @@ def transformer_embeddings(data_path: str, entity2id: dict) -> tuple[Tensor]:
     id_to_def_path = data_path + "/id_to_def.json"
     with open(id_to_def_path, "r") as id_to_def_json:
         id_to_def = json.load(id_to_def_json)
+    id_to_def["DUMMY_ENTITY"] = ""
+    id_to_def["NO_OP_ENTITY"] = ""
 
     def_vocab = {}
     transformer = SentenceTransformer("all-MiniLM-L6-v2")
