@@ -21,6 +21,7 @@ from src.data_utils import START_RELATION_ID
 import src.utils.ops as ops
 from src.utils.ops import int_var_cuda, var_cuda
 from numpy import unique
+from transformer import transformer_embeddings
 
 
 class KnowledgeGraph(nn.Module):
@@ -71,9 +72,10 @@ class KnowledgeGraph(nn.Module):
         self.relation_img_embeddings = None
         self.EDropout = None
         self.RDropout = None
-        
-        self.define_modules()
-        self.initialize_modules()
+
+        self.define_modules_transfo()        
+        # self.define_modules()
+        # self.initialize_modules()
 
     def load_graph_data(self, data_dir):
         # Load indices
@@ -360,6 +362,14 @@ class KnowledgeGraph(nn.Module):
     def triple2ids(self, triple):
         e1, e2, r = triple
         return self.entity2id[e1], self.entity2id[e2], self.relation2id[r]
+
+    def define_modules_transfo(self):
+        corpus_embeddings = transformer_embeddings(self.args.data_dir, self.entity2id)
+        self.entity_embeddings = nn.Embedding.from_pretrained(corpus_embeddings, freeze=True)
+        self.relation_embeddings = nn.Embedding(self.num_relations, self.relation_dim)
+        nn.init.xavier_normal(self.relation_embeddings.weight)
+        self.EDropout = nn.Dropout(self.emb_dropout_rate)
+        self.RDropout = nn.Dropout(self.RDropout)
 
     def define_modules(self):
         if not self.args.relation_only:
