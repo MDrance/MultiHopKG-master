@@ -55,7 +55,8 @@ cmd="python3 -m src.experiments \
     $use_action_space_bucketing_flag \
     --gpu $gpu \
     --eemb_freeze $eemb_freeze \
-    --remb_freeze $remb_freeze \ 
+    --remb_freeze $remb_freeze \
+     
     $ARGS"
 
 echo "Executing $cmd"
