@@ -80,7 +80,7 @@ class KnowledgeGraph(nn.Module):
         if args.process_data:       
             self.define_modules()
             self.initialize_modules()
-        if args.model = "conve":
+        if args.model == "conve":
             self.define_modules()
             self.initialize_modules()
         else:
